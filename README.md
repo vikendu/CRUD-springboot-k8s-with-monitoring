@@ -26,7 +26,9 @@ You need 1 mysql & 1 app container to run the app. In the same docker network.
 `  -d mysql:latest`
 
 2. web app:
-`docker pull vikendu/crud-app:1.2.1`
-`docker run -d -p 8080:8080 vikendu/crud-app:1.2.1`
+`docker pull vikendu/crud-app:1.2.3`
+`docker run -d -p 8080:8080 vikendu/crud-app:1.2.3`
+
+OR just `docker compose up`
 
 If everything went right the app should run at http://localhost:8080/users

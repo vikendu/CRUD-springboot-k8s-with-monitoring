@@ -1,0 +1,39 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-crud-app
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_db
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  springboot-app:
+    image: vikendu/crud-app:1.2.3
+    container_name: crud-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - springboot-network
+    ports:
+      - "8080:8080"
+
+networks:
+  springboot-network:
+    name: springboot-network
+    driver: bridge
+
+volumes:
+  mysql-data:
