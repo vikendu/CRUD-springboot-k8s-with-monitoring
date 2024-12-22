@@ -19,17 +19,6 @@ services:
       timeout: 5s
       retries: 5
 
-  springboot-app:
-    image: vikendu/crud-app:1.2.3
-    container_name: crud-app
-    depends_on:
-      mysql:
-        condition: service_healthy
-    networks:
-      - springboot-network
-    ports:
-      - "8080:8080"
-
 networks:
   springboot-network:
     name: springboot-network
