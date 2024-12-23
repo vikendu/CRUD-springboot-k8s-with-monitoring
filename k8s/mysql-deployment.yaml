@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-crud-app
+spec:
+  selector:
+    matchLabels:
+      app: mysql-crud-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-crud-app
+    spec:
+      containers:
+      - name: mysql-crud-app
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        - name: MYSQL_DATABASE
+          value: user_db
+        - name: MYSQL_USER
+          value: mysql
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        ports:
+        - containerPort: 3306
+          name: mysql-crud-app
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        readinessProbe:
+          exec:
+            command: ["mysqladmin", "ping", "-u", "root"]
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          timeoutSeconds: 1
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+
+---
