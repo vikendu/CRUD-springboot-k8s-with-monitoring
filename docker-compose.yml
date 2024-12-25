@@ -22,6 +22,8 @@ services:
   springboot-app:
     image: vikendu/crud-app:latest
     container_name: crud-app
+    environment:
+      KAFKA_BOOTSTRAP_SERVER: kafka:9092
     depends_on:
       kafka:
         condition: service_started
