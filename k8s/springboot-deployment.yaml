@@ -14,9 +14,12 @@ spec:
     spec:
       containers:
       - name: crud-app
-        image: vikendu/crud-app:1.2.3
+        image: vikendu/crud-app:latest
         ports:
         - containerPort: 8080
+        env:
+          - name: KAFKA_BOOTSTRAP_SERVER
+            value: my-cluster-kafka-bootstrap.kafka:9092
         readinessProbe:
           httpGet:
             path: /users

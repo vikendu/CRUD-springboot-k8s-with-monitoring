@@ -31,6 +31,9 @@ You need 1 mysql & 1 app container to run the app. In the same docker network.
 
 OR just `docker compose up`  
 
-If everything went right the app should run at http://localhost:8080/users  
+OR just kubectl apply -f k8s/everything.yaml to get it up & running in a cluster.
+Note: if deploying on a k8s cluster make sure to have kafka setup(Strimzi is cool)[https://strimzi.io/quickstarts/]
 
-OR just `kubectl apply -f k8s/everything.yaml` to get it up & running in a cluster.  
+create a table for Audit Trace:
+
+If everything went right the app should run at http://localhost:8080/users  
