@@ -1,39 +1,25 @@
-To build app:
-`mvn clean install`
-`mvn spring-boot:run`
+## Simple Java SpringBoot app to do CRUD with a UI.
+![Screenshot 2024-12-21 115133](https://github.com/user-attachments/assets/4d7dfcf1-4a1d-470f-afc5-d092b2f7faa0)
 
-To build JAR:
-`mvn package`
-(build created in target dir)
+### Can run on a K8s cluster or just Docker Compose
 
-To run:
-`mvn spring:run`
+### Uses Kafka to build an audit trace & Logging events
+![image](https://github.com/user-attachments/assets/0f23b5b3-a429-4012-8a49-0b9b3c459ec3)
 
-To run JAR:
-`java -jar target/crud-0.0.1-SNAPSHOT.jar`
 
-OR run it on Docker:
-You need 1 mysql & 1 app container to run the app. In the same docker network.
+### Monitoring using Prometheus & Grafana
+![Screenshot 2024-12-26 203330](https://github.com/user-attachments/assets/5942202b-b340-4688-a1e5-b8041c9342a8)
 
-1. mysql:
-`docker run --name mysql-crud-app \  
-  -e MYSQL_ROOT_PASSWORD=root \  
-  -e MYSQL_DATABASE=user_db \  
-  -e MYSQL_USER=mysql \  
-  -e MYSQL_PASSWORD=root \  
-  -v <persistent-volume>:/var/lib/mysql \  
-  -p 3306:3306 \  
-  -d mysql:latest`
-  
-2. web app:
-`docker pull vikendu/crud-app:1.2.3`
-`docker run -d -p 8080:8080 vikendu/crud-app:1.2.3`
+![Screenshot 2024-12-26 203424](https://github.com/user-attachments/assets/a56ebd44-9cb7-4514-a0fe-3d4fdc93c662)
 
-OR just `docker compose up`  
 
-OR just kubectl apply -f k8s/everything.yaml to get it up & running in a cluster.
+## Build Options
+manually build app using maven, start mysql & kafka(please look into the compose file for any other dependancy)  
+
+## Simpler options to run
+just `docker compose up`  
+
+OR just `kubectl apply -f k8s/<everything>.yaml` to get it up & running in a cluster.
 Note: if deploying on a k8s cluster make sure to have kafka setup(Strimzi is cool)[https://strimzi.io/quickstarts/]
 
-create a table for Audit Trace:
-
-If everything went right the app should run at http://localhost:8080/users  
+If everything went right the app should run at `http://localhost:8080/users`
