@@ -1,4 +1,4 @@
-## Simple Java SpringBoot app to do CRUD with a UI.
+## Java SpringBoot app to do CRUD with a UI.
 ![Screenshot 2024-12-21 115133](https://github.com/user-attachments/assets/4d7dfcf1-4a1d-470f-afc5-d092b2f7faa0)
 
 ### Can run on a K8s cluster or just Docker Compose
